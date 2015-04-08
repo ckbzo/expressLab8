@@ -11,9 +11,18 @@ $(document).ready(function(){
         // $("#json").text(jobj);
         var url = "http://52.11.58.98/comment";
         $("#json").append(jobj);
-        $.post(url,jobj,function(data,textStatus) {
-          $("#done").append(textStatus);
-        });
+        //$.post(url,jobj,function(data,textStatus) {
+          //$("#done").append(textStatus);
+        //});
+ 	jQuery.ajax ({
+            url: url,
+            type: "POST",
+            data: jobj,
+            contentType: "application/json; charset=utf-8",
+            success: function(){
+              $("#done").append("Success");
+            }
+        	});
     });
     $("#Show").click(function(){
     	//do stuff
@@ -22,7 +31,8 @@ $(document).ready(function(){
     		var everything;
     		everything = "<ul>";
     		$.each(data, function(i, item){
-    			everything += "<li> Name: "+data[i].Name+" Comment: "+data[i].Comment+"</li>";
+    		console.log("this is data "+data);	
+		everything += "<li> Name: "+data[i].Name+" Comment: "+data[i].Comment+"</li>";
     		});
     		everything += "</ul>";
     		$("#currentComments").html(everything);
